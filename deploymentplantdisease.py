@@ -11,7 +11,7 @@ with open("finalout2.keras", "wb") as f:
     f.write(response.content)
 
 # Load the model
-model = tf.keras.models.load_model("finalout2.keras")
+
 
 # -------- Model Prediction Function --------
 def predict_disease(image_file):
