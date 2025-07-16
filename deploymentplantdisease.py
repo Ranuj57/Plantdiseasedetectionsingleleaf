@@ -2,9 +2,20 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 
+import requests
+
+# Download model at runtime
+url = "https://drive.google.com/uc?export=download&id=1vbu7jLi_ksbO2wUKrx-d4jNheTpGGBND"
+response = requests.get(url)
+with open("finalout2.keras", "wb") as f:
+    f.write(response.content)
+
+# Load the model
+model = tf.keras.models.load_model("finalout2.keras")
+
 # -------- Model Prediction Function --------
 def predict_disease(image_file):
-    model = tf.keras.models.load_model(r"D:\pythonProject\saved_models\finalout2.keras")
+    model = tf.keras.models.load_model("finalout2.keras")
     image = tf.keras.preprocessing.image.load_img(image_file, target_size=(128, 128))
     input_array = tf.keras.preprocessing.image.img_to_array(image)
     input_array = np.expand_dims(input_array, axis=0)
